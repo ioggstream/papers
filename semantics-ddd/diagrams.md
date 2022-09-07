@@ -4,17 +4,11 @@
 ```mermaid
 
 graph TD
-%%{init: {"theme": "base", "themeVariables": { "primaryColor": "#3344d0", "primaryTextColor": "lightgray", "clusterBkg": "none", "tertiaryBorderColor": "#3344d0", "nodeTextColor": "white", "fontFamily": "Titillium"}}}%%
-
+    classDef cluster font-weight: bold,fill:none,color:darkgray,stroke:#3344d0,stroke-width:2px
+    classDef default fill:#3344d0,stroke:#3344d0,color:#fff,clusterBkg:none    
     classDef subgraph_padding fill:none, stroke:none
-    classDef invisible_line stroke:none
-    %% classDef default fill:#3344d0,stroke:#3344d0,color:#fff,clusterBkg:none
-    classDef subgraph_italia fill:none,color:darkgray,stroke:#3344d0,stroke-width:2px
-
-    subgraph DM [ Domain Model]
-    end
-
-    subgraph P2 ["Bounded contexts (API Design)"]
+    
+    subgraph BC ["Bounded contexts (API Design) &nbsp;"]
     subgraph Padder2 [ ]
         DataModel[Data Models] --- 
         Operations 
@@ -26,26 +20,68 @@ graph TD
     end
     end
 
-    subgraph Sol["Design (Solution Space)"]
+    subgraph Sol["Design (Solution Space) &nbsp;"]
         subgraph Padder3 [ ]
-        DM 
-        P2
+        UL(Ubiquitous Language) ---
+        DM(Domain Model)
+        BC
+        linkStyle 2 stroke:none
+        T[fa:fa-user IT Architect]
         end
     end
-    subgraph Domain["Domain (Problem Space)"]
+    subgraph Domain["Domain (Problem Space) &nbsp;"]
+        D[fa:fa-user Domain Expert]
+        %% --- Ontologies 
+        %% linkStyle 3 stroke:none
+        subgraph Padder1 [ ]
+        Sol
+        end
+    end
+
+    %% Padders avoid overflows in subgraphs.
+    class Padder1,Padder2,Padder3 subgraph_padding
+    
+```
+
+```mermaid
+
+graph TD
+%%{init: {"theme": "base", "themeVariables": { "primaryColor": "#3344d0", "primaryTextColor": "#27364e", "clusterBkg": "none", "tertiaryBorderColor": "#3344d0", "nodeTextColor": "white", "fontFamily": "Titillium"}}}%%
+
+
+    classDef cluster font-weight: bold,fill:none,color:darkgray,stroke:#3344d0,stroke-width:2px
+    classDef default fill:#3344d0,stroke:#3344d0,color:#fff,clusterBkg:none    
+    classDef subgraph_padding fill:none, stroke:none
+    
+    subgraph BC ["Bounded contexts (API Design) &nbsp;"]
+    subgraph Padder2 [ ]
+        DataModel[Data Models] --- 
+        Operations 
+        Inputs ---
+        Outputs
+        %% Using linkStyle and --- links to display items as a square
+        linkStyle 0 stroke:none
+        linkStyle 1 stroke:none
+    end
+    end
+
+    subgraph Sol["Design (Solution Space) &nbsp;"]
+        subgraph Padder3 [ ]
+        UL(Ubiquitous Language) ---
+        DM(Domain Model)
+        BC
+        linkStyle 2 stroke:none
+        end
+    end
+    subgraph Domain["Domain (Problem Space) &nbsp;"]
         Ontologies
         subgraph Padder1 [ ]
         Sol
         end
     end
 
-    %%class P2 subgraph_italia
-    %%class Domain subgraph_italia
-    %% class Sol subgraph_italia
     %% Padders avoid overflows in subgraphs.
-    class Padder1 subgraph_padding
-    class Padder2 subgraph_padding
-    class Padder3 subgraph_padding
+    class Padder1,Padder2,Padder3 subgraph_padding
 
 
 
