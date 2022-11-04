@@ -22,6 +22,18 @@ at least some familiarity with them:
 -   [*https://github.com/OAI/OpenAPI-Specification/*](https://github.com/OAI/OpenAPI-Specification/)
 -   [*https://www.w3.org/2019/wot/json-schema*](https://www.w3.org/2019/wot/json-schema)
 
+### Acknowledgements
+
+Thanks to the following people for their feedback:
+
+Giorgia Lodi,
+Matteo Fortini,
+Saverio Pulizzi,
+Pierre-Antoine Champin,
+Vladimir Alexiev
+and Rob Atkinson.
+
+
 ### Goals
 
 -   Describe **in a single document** both the syntax and semantics of a
@@ -529,7 +541,7 @@ This is quite experimental, since using [JS-LD] requires at least some
 schema adaptations.
 
 ### Example
-
+a
 ```yaml
 {
  "@context": "https://gist.githubusercontent.com/ioggstream/b3fcde9a56e0b63436753ab6139fbe38/raw/eaa32eaa50f1fadb0d2d976e1e07c8c38f98ac61/jsonschema.context.jsonld",
@@ -539,7 +551,7 @@ schema adaptations.
  "properties": {
  "given_name": {"type": "string", "maxLength":
  "family_name": {"type": "string", "maxLength":
- }
+ }t
  }
 }
 ```
