@@ -18,9 +18,9 @@ at least some familiarity with them:
 
 -   [*https://w3c.github.io/json-ld-syntax/*](https://w3c.github.io/json-ld-syntax/)
 -   [*https://www.w3.org/TR/json-ld11-framing/*](https://www.w3.org/TR/json-ld11-framing/)
--   [*https://json-schema.org/*](https://json-schema.org/)
+-   [*https://JSON Schema.org/*](https://JSON Schema.org/)
 -   [*https://github.com/OAI/OpenAPI-Specification/*](https://github.com/OAI/OpenAPI-Specification/)
--   [*https://www.w3.org/2019/wot/json-schema*](https://www.w3.org/2019/wot/json-schema)
+-   [*https://www.w3.org/2019/wot/JSON Schema*](https://www.w3.org/2019/wot/JSON Schema)
 
 ### Acknowledgements
 
@@ -39,7 +39,7 @@ and Rob Atkinson.
 -   Describe **in a single document** both the syntax and semantics of a
     JSON object
 -   Describe semantically the contents defined in an API spec or a
-    json-schema
+    JSON Schema
 -   Support for [*OAS3.0*](https://swagger.io/specification/) /
     JsonSchema Draft4
 -   Easy for non-semantic experts
@@ -58,7 +58,7 @@ and Rob Atkinson.
 
 ### Non-Goals:
 
--   define a way to convert automatically RDF to JSON-schema/OAS. We
+-   define a way to convert automatically RDF to JSON Schema/OAS. We
     just want to describe in a single document both the semantic and
     syntax of a JSON object. You can either edit that information by
     hand or generate it automatically using your favorite tools.
@@ -75,7 +75,7 @@ and Rob Atkinson.
 Q1: Why not use a full-semantic approach?
 
 A1: The goal is not to disrupt the current API providers and Digital
-Service implementers' tooling, and they use json-schema and xsd to
+Service implementers' tooling, and they use JSON Schema and xsd to
 define schemas.
 
 Q2: Can't you use json-ld framing to transform JSON in JSON-LD
@@ -88,15 +88,15 @@ doc*](https://w3c.github.io/json-ld-syntax/#interpreting-json-as-json-ld).
 Q3: Can you
 
 
-# Hypothesis 1 - Attach semantic information as json-schema
+# Hypothesis 1 - Attach semantic information as JSON Schema
 keywords
 
-Register keywords in json-schema (eg. using a [*meta-schema like this
+Register keywords in JSON Schema (eg. using a [*meta-schema like this
 one*](https://gist.github.com/ioggstream/8e858509a3ca535c5af230986aeefaf7)
 in [*draft
-2020-12*](https://json-schema.org/draft/2020-12/json-schema-core.html),
+2020-12*](https://JSON Schema.org/draft/2020-12/JSON Schema-core.html),
 or using x-jsonld- prefix in [*draft
-4*](https://json-schema.org/draft-04/json-schema-core.html)) to
+4*](https://JSON Schema.org/draft-04/JSON Schema-core.html)) to
 reference json-ld @context and @type.
 
 Developers can reuse the provided @context, and make it accessible at a
@@ -109,7 +109,7 @@ associated
 ontologies*](https://github.com/ioggstream/json-semantic-playground/blob/master/dati_playground/schema.py#L169)
 and vocabularies.
 
-### Example 1: embedded context in OAS3 (JSON schema draft-4)
+### Example 1: embedded context in OAS3 (JSON Schema draft-4)
 
 ```yaml
 Person:
@@ -131,8 +131,7 @@ Person:
     custom_id: { maxLength: 255, type: string }
 ```
 
-### Example 2: referenced context in OAS3 (JSON schema
-draft-4)
+### Example 2: referenced context in OAS3 (JSON Schema draft-4)
 
 ```yaml
 Person:
@@ -148,7 +147,7 @@ Person:
    custom_id: { maxLength: 255, type: string }
 ```
 
-### Example 3: reuse context in another schema in (JSON schema draft-4)
+### Example 3: reuse context in another schema in (JSON Schema draft-4)
 
 ```yaml
 Person:
@@ -184,10 +183,10 @@ PersonLD:
 ```
 
 
-Since [*json-ld does not allow specifying a rdf:type in
-@context*](https://www.w3.org/2018/json-ld-wg/Meetings/Minutes/2018/2018-07-27-json-ld#section2-1),
-the keyword `x-jsonld-type` (OAS3 / json-schema draft 4) or
-jsonld-type (json-schema draft 2020-12) can be introduced to cover this
+Since [json-ld does not allow specifying a rdf:type in
+@context](https://www.w3.org/2018/json-ld-wg/Meetings/Minutes/2018/2018-07-27-json-ld#section2-1),
+the keyword `x-jsonld-type` (OAS3 / JSON Schema draft 4) or
+`jsonld-type` (JSON Schema draft 2020-12) can be introduced to cover this
 use case. This information is especially useful at design time.
 
 Pros:
@@ -196,20 +195,20 @@ Pros:
     directly accessible without re-defining a new vocabulary for each
     json-ld feature
 -   Conciseness, easy to add a @context to existing schemas
--   Easy to implement: a json-schema parser can be extended to support
+-   Easy to implement: a JSON Schema parser can be extended to support
     the "@context" keyword; processing can be done using existing
     json-ld library
--   The json-schema instance written for application/json, can be reused
-    for the application/ld+json json-schema instance
+-   The JSON Schema instance written for application/json, can be reused
+    for the application/ld+json JSON Schema instance
 
 Cons:
 
 -   [*@context*](https://github.com/w3c/json-ld-syntax/issues/386#issuecomment-1026864738)[*
     does not aim to allow you to express any arbitrary JSON to RDF
     *](https://github.com/w3c/json-ld-syntax/issues/386#issuecomment-1026864738)transformation:
-    for example there's no way to use @context to attach a rdf:type to
+    for example there's no way to use @context to attach a `rdf:type` to
     JSON objects that do not contain this information. This can be
-    addressed extending the keywords (eg. x-jsonld-type)
+    addressed extending the keywords (eg. `x-jsonld-type`)
 -
 -   Management of nested schemas could be complex.
 -   there's no way to attach a context to a string, so it is not
@@ -295,20 +294,19 @@ There's a playground editor to test this solution at https://ioggstream.github.i
     will show all class properties
 
 
-# Hypothesis 2 - Annotate OAS and json-schemas referencing
-semantic assets
+# Hypothesis 2 - Annotate OAS and JSON Schemas referencing semantic assets
 
 Every object / property is annotated according to a specific vocabulary.
 A couple of vocabulary proposals are
 [*[SOAS]*](http://www.intelligence.tuc.gr/~petrakis/publications/SOAS4.pdf)
-using annotations like: x-refersTo, x-kindOf or
+using annotations like: `x-refersTo`, `x-kindOf` or [JLD]
 [*[JLD]*](https://www.w3.org/ns/json-ld) .
 
 This EU document (2018)[* Deliverable 3.2.c: Semantic Interoperability
 Design for Smart Object Platforms and
 Services*](https://ec.europa.eu/research/participants/documents/downloadPublic?documentIds=080166e5bca75de2&appId=PPGMS)
 has a similar approach using the "rdfAnnotation" keyword in
-json-schema
+JSON Schema
 
 ### Example 1: x-refersTo annotations
 
@@ -340,35 +338,30 @@ Person:
 
 ```yaml
 Person:
- @type: https://schema.org/Person
- required:
- - given_name
- - family_name
- type: object
- properties:
- family_name:
- @id: https://schema.org/familyName
-
- maxLength: 255
- type: string
- given_name:
-
- @id: https://schema.org/givenName
- maxLength: 255
- type: string
- country:
-
- @id: https://schema.org/addressCountry
- @language: en
- maxLength: 255
-
- type: string
- tax_code:
- $ref: #/TaxCode
+  @type: https://schema.org/Person
+  required:
+  - given_name
+  - family_name
+  type: object
+  properties:
+    family_name:
+      @id: https://schema.org/familyName
+      maxLength: 255
+      type: string
+    given_name:
+      @id: https://schema.org/givenName
+      maxLength: 255
+      type: string
+    country:
+      @id: https://schema.org/addressCountry
+      @language: en
+      maxLength: 255
+      type: string
+    tax_code:
+      $ref: "#/TaxCode"
 TaxCode:
-
- @id: https://w3id.org/italia/onto/CPV/taxCode
- type: string
+  @id: https://w3id.org/italia/onto/CPV/taxCode
+  type: string
 ```
 
 
@@ -382,7 +375,7 @@ Pros:
 
 Cons:
 
--   **The @context becomes a byproduct of the json-schema**: to cover
+-   **The @context becomes a byproduct of the JSON Schema**: to cover
     all json-ld features like "@vocab", "@base", "@language",
     \... the
     [*[SOAS]*](http://www.intelligence.tuc.gr/~petrakis/publications/SOAS4.pdf)
@@ -395,7 +388,7 @@ Cons:
     vocabulary to the evolving json-ld specifications
 -   Together with a vocabulary, a parser must be implemented
 -   No native support for json-ld framing
--   Using json-ld annotations like @id and @type in json-schema can be
+-   Using json-ld annotations like @id and @type in JSON Schema can be
     semantically inaccurate, since @type refers to schema-istances, not
     , eg.
 
@@ -409,15 +402,15 @@ Instead using type should be probably done as in
 
 ```yaml
 Person:
- "@type": https://www.w3.org/2019/wot/json-schema#DataSchema
+ "@type": https://www.w3.org/2019/wot/JSON Schema#DataSchema
  properties: {...}
 ```
 
-# Hypothesis 3 - Attach context as a json-schema property
+# Hypothesis 3 - Attach context as a JSON Schema property
 
 Add @context and @type property to every schema definition. Their
 values will be defined as `enum: [ ..static value \...]` in OAS3
-json-schema draft 4 or `const` in OAS3.1 json-schema draft 2020-12,
+JSON Schema draft 4 or `const` in OAS3.1 JSON Schema draft 2020-12,
 meaning it does not change between different instances.
 
 Developers can reuse the provided @context, that can be accessible at a
@@ -455,7 +448,7 @@ Pros:
     directly accessible without re-defining a vocabulary for each
     json-ld feature
 -   Conciseness
--   Easy to implement: a custom json-schema parser has just to
+-   Easy to implement: a custom JSON Schema parser has just to
     acknowledge "@context" property is a json-ld context, and use a
     suitable parser to process it
 -   The schema is usable for both application/json and
@@ -466,39 +459,39 @@ Cons:
 -   "@context" is a normal property and has no semantic meaning, so
     it is @type
 -   the schema is actually different from the original one
--   "const" is not valid json-schema draft4, but a type: object + enum
+-   "const" is not valid JSON Schema draft4, but a type: object + enum
     will work
 
-[]{#anchor-181}Hypothesis 4 - full RDF
+# Hypothesis 4 - full RDF
 
-It is possible to describe a json-schema using [*Draft:JSON Schema in
-RDF*](https://www.w3.org/2019/wot/json-schema) and json-ld and attaching
-a context. Using this approach, both the json-schema and the @context
+It is possible to describe a JSON Schema using [*Draft:JSON Schema in
+RDF*](https://www.w3.org/2019/wot/JSON Schema) and json-ld and attaching
+a context. Using this approach, both the JSON Schema and the @context
 are byproducts of the json-ld.
 
 ### Example
 
 ```yaml
 '@context':
- json-schema: https://www.w3.org/2019/wot/json-schema#
+ JSON Schema: https://www.w3.org/2019/wot/JSON Schema#
  jsonld: http://www.w3.org/ns/json-ld#
  jsonld:iri:
     type: @id
     '@id': http://sche.ma/Person
-    '@type': json-schema:ObjectSchema
-json-schema:properties:
+    '@type': JSON Schema:ObjectSchema
+JSON Schema:properties:
 - '@id': _:b0
-  '@type': json-schema:StringSchema
-  json-schema:propertyName: family_name
+  '@type': JSON Schema:StringSchema
+  JSON Schema:propertyName: family_name
 - '@id': _:b1
-  '@type': json-schema:StringSchema
-  json-schema:propertyName: given_name
+  '@type': JSON Schema:StringSchema
+  JSON Schema:propertyName: given_name
 - '@id': _:b2
-  '@type': json-schema:StringSchema
-   json-schema:propertyName: country
+  '@type': JSON Schema:StringSchema
+   JSON Schema:propertyName: country
 - '@id': _:b3
-  '@type': json-schema:StringSchema
-  json-schema:propertyName: custom_id
+  '@type': JSON Schema:StringSchema
+  JSON Schema:propertyName: custom_id
 jsonld:context:
  jsonld:definitions:
  - @type: jsonld:TermDefinition
@@ -518,7 +511,7 @@ Pros:
 
 Cons:
 
--   Artifacts such as json-schemas and json-ld contexts used in API
+-   Artifacts such as JSON Schemas and json-ld contexts used in API
     gateways, development frameworks and tools are byproducts of RDF.
     This is risky because if the generated schemas/contexts are not
     correctly or consistently processed by tools, they may require
@@ -530,18 +523,18 @@ Cons:
 -   No actual benefits for the underlying services (API
     provider/consumer) from treating a JSONSchema as an RDF
 
-[]{#anchor-213}Hypothesis 5 - Hybrid RDF
+# Hypothesis 5 - Hybrid RDF
 
 Using [JS-LD]
 [*context*](https://gist.githubusercontent.com/ioggstream/b3fcde9a56e0b63436753ab6139fbe38/raw/eaa32eaa50f1fadb0d2d976e1e07c8c38f98ac61/jsonschema.context.jsonld)
-it's possible to convert a json-schema to an RDF document, that could
+it's possible to convert a JSON Schema to an RDF document, that could
 be further annotated, indexed and processed.
 
 This is quite experimental, since using [JS-LD] requires at least some
 schema adaptations.
 
 ### Example
-a
+
 ```yaml
 {
  "@context": "https://gist.githubusercontent.com/ioggstream/b3fcde9a56e0b63436753ab6139fbe38/raw/eaa32eaa50f1fadb0d2d976e1e07c8c38f98ac61/jsonschema.context.jsonld",
@@ -560,27 +553,27 @@ Becomes
 
 ```d
 @prefix xsd:
-@prefix json-schema:
+@prefix JSON Schema:
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 
-_:b0 <json-schema:Person> _:b1 .
+_:b0 <JSON Schema:Person> _:b1 .
 
-_:b1 <rdf:type> <json-schema:ObjectSchema> .
-_:b1 <json-schema:additionalProperties> "false"^^<xsd:boolean> .
-_:b1 <json-schema:properties> _:b2 .
-_:b1 <json-schema:properties> _:b3 .
+_:b1 <rdf:type> <JSON Schema:ObjectSchema> .
+_:b1 <JSON Schema:additionalProperties> "false"^^<xsd:boolean> .
+_:b1 <JSON Schema:properties> _:b2 .
+_:b1 <JSON Schema:properties> _:b3 .
 
-_:b2 <rdf:type> <json-schema:StringSchema> .
-_:b2 <json-schema:maxLength> "255"^^<xsd:integer> .
-_:b2 <json-schema:propertyName> "family_name" .
+_:b2 <rdf:type> <JSON Schema:StringSchema> .
+_:b2 <JSON Schema:maxLength> "255"^^<xsd:integer> .
+_:b2 <JSON Schema:propertyName> "family_name" .
 
-_:b3 <rdf:type> <json-schema:StringSchema> .
-_:b3 <json-schema:maxLength> "255"^^<xsd:integer> .
-_:b3 <json-schema:propertyName> "given_name" .
+_:b3 <rdf:type> <JSON Schema:StringSchema> .
+_:b3 <JSON Schema:maxLength> "255"^^<xsd:integer> .
+_:b3 <JSON Schema:propertyName> "given_name" .
 ```
 
-For example, since @context contains `@vocab: json-schema`, all
-schema names are treated as json-schemas. To fix this up, we need to
+For example, since @context contains `@vocab: JSON Schema`, all
+schema names are treated as JSON Schemas. To fix this up, we need to
 modify the above schema attaching `$id`s. This makes it difficult to
 support OAS3.0 schemas
 
@@ -596,8 +589,8 @@ Cons:
 -   No actual benefits for the underlying services from treating a
     JSONSchema as an RDF
 
-[]{#anchor-238}Hypothesis 6 - Attach context and term definitions as a
-json-schema property
+# Hypothesis 6 - Attach context and term definitions as a
+JSON Schema property
 
 This is actually a mix between hypothesis 2 and 3 above.
 
