@@ -350,6 +350,24 @@ there are various shortcomings when they are used verbatim for designing
 digital services data schemas and as an Ubiquitous Language for
 Domain-Driven Design.
 
+## Interoerability concepts
+
+[EIF]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/european-interoperability-framework-detail
+[legal-interoperability]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/legal-interoperability
+[organisational-interoperability]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/organisational-interoperability
+[technical-interoperability]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/technical-interoperability
+[semantic-interoperability]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/semantic-interoperability
+[interoperability-model]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/interoperability-model
+
+
+This document relies on the interoperability concepts described in the European Interoperability Framework (EIF) [EIF]. The EIF is a set of concepts and principles that can be used to design interoperable systems.
+It is very helpful in identifying interoperability requirements and associated issues.
+
+The EIF identifies four interoperability layers: legal, organizational, semantic, and technical.
+Two systems require a certain degree of interoperability
+at every layer to communicate reliably.
+
+
 # Domain driven in Public Services
 
 This section highlights the differences in Domain-Driven design between public and private services.
@@ -589,26 +607,24 @@ at legal and organizational level
 (e.g. ensuring that regulation and procedures do not hinder the creation of digital services and avoid laws
 providing too much procedural or technical details that should instead be delegated to the implementation) or adopting a [user-centric
 approach](https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/solution/eif-toolbox/underlying-principle-6-user-centricity)
-when designing specific digital services. When multiple domains (and
-regulations) are involved, this is more complex.
+when designing specific digital services.
+When multiple domains (and regulations) are involved, this is more complex.
 
-Cross-domain interoperability is complicated by the fact that every
-institution (e.g. a ministry, a department, a country):
+Cross-domain interoperability is complicated by the fact that
+every institution (e.g. a ministry, a department, a country):
 
-1.  has its own understanding of the interested domains;
+1. has its own understanding of the interested domains;
 
-2.  addresses different problems with different regulations and
-    procedures;
+2. addresses different problems with different regulations and procedures;
 
-3.  defines its services in terms of its own Model and Bounded Contexts,
-    and has its internal Ubiquitous Language even when a common domain
-    knowledge exists.
+3. defines its services in terms of its own Model and Bounded Contexts, and has its internal [Ubiquitous Language] even when a common domain knowledge exists.
 
 Agencies tend to address cross-domain interoperability shifting problems
-away from the legal and organizational layers, down to the technical
-layer. Developing *ad hoc* connectors that are specific to each
-interaction is considered simpler than to uniform procedures and
-regulations, but this increases costs, complexity, and the attack
+away from the legal and organizational layers,
+down to the technical layer.
+Developing *ad hoc* connectors that are specific to each
+interaction is considered simpler than to uniform procedures and regulations,
+but this increases costs, complexity, and the attack
 surface of platforms, while reducing usability.
 
 **Who**                       | **Problem Space**         |**Solution Space**
@@ -617,12 +633,11 @@ Regulator (can be an agency)  | Citizen needs             |Regulatory framework
 Agencies                      | Regulatory framework      |Bureaucratic procedures
 Designer / Supplier           | Bureaucratic procedures   |Compliance
 
-Solutions involve working at all interoperability layers defined in the
-[European Interoperability
-Framework](https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/european-interoperability-framework-detail):
-legal, organizational, semantic, and technical:
 
-1. address the legal and organizational layer first; this is to
+Solutions involve working at all [EIF] interoperability layers:
+legal, organizational, semantic, and technical.
+
+1. address the legal and organizational layer first. This is to
    minimize the interoperability issues to be tackled at technical
    level;
 2. agree on a shared terminology (and ontologies) in order to have a
