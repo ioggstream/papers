@@ -1,7 +1,20 @@
 ---
 title: "Domain Driven Design and Ontologies"
 ---
-
+- [Abstract](#abstract)
+- [Introduction](#introduction)
+  - [Preliminary notes](#preliminary-notes)
+  - [Domain Driven Design](#domain-driven-design)
+  - [Ontologies model the problem space](#ontologies-model-the-problem-space)
+    - [Semantic technologies are not optimized for syntax](#semantic-technologies-are-not-optimized-for-syntax)
+  - [Interoperability concepts](#interoperability-concepts)
+- [Domain driven in Public Services](#domain-driven-in-public-services)
+  - [What does Domain mean for public services?](#what-does-domain-mean-for-public-services)
+  - [The solution space in digital public services](#the-solution-space-in-digital-public-services)
+  - [Domain terminology in the public and the private sector](#domain-terminology-in-the-public-and-the-private-sector)
+  - [Ontologies and the solution space](#ontologies-and-the-solution-space)
+  - [Aligning the solution space between Users and Architects](#aligning-the-solution-space-between-users-and-architects)
+    - [Aligning the solution space in schema design](#aligning-the-solution-space-in-schema-design)
 # Abstract
 
 Ontologies and Controlled Vocabularies are meant to standardize
@@ -55,6 +68,8 @@ The Solution space is characterized by:
 
 [Bounded Context]: https://www.martinfowler.com/bliki/BoundedContext.html
 [aggregates]: https://martinfowler.com/bliki/DDD_Aggregate.html
+[Anti-Corruption Layer]: https://pubs.opengroup.org/architecture/o-aa-standard/DDD-strategic-patterns.html#ddd-downstream-patterns
+[Ubiquitous Language]: https://martinfowler.com/bliki/UbiquitousLanguage.html
 
 - an [Ubiquitous Language],
     that is a formalized language based on the Model that allows
@@ -62,7 +77,6 @@ The Solution space is characterized by:
     domain experts (e.g. experts in healthcare, procurement, finance,
     ...) to communicate without ambiguities.
 
-[Ubiquitous Language]: https://martinfowler.com/bliki/UbiquitousLanguage.html
 
 ```{mermaid}
 graph TD
@@ -141,7 +155,7 @@ vocabulary name which provides a namespace.
 [https://dbpedia.org/data/](https://dbpedia.org/data/Dog.ttl)
 vocabulary is defined by the following string "The dog is a four legged
 animal" and can be referenced via the URI
-[https://dbpedia.org/data/Dog](https://dbpedia.org/data/Dog)*
+https://dbpedia.org/data/Dog*
 
 An ontology is a vocabulary that describes a specific field of knowledge
 using a formal language named Resource Description Framework ([RDF])
@@ -350,7 +364,7 @@ there are various shortcomings when they are used verbatim for designing
 digital services data schemas and as an Ubiquitous Language for
 Domain-Driven Design.
 
-## Interoerability concepts
+## Interoperability concepts
 
 [EIF]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/european-interoperability-framework-detail
 [legal-interoperability]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/legal-interoperability
@@ -363,9 +377,8 @@ Domain-Driven Design.
 This document relies on the interoperability concepts described in the European Interoperability Framework (EIF) [EIF]. The EIF is a set of concepts and principles that can be used to design interoperable systems.
 It is very helpful in identifying interoperability requirements and associated issues.
 
-The EIF identifies four interoperability layers: legal, organizational, semantic, and technical.
-Two systems require a certain degree of interoperability
-at every layer to communicate reliably.
+The EIF identifies four interoperability layers: legal, organizational, semantic & syntactic, and technical.
+Two systems require a certain degree of interoperability at every layer to communicate reliably.
 
 
 # Domain driven in Public Services
@@ -514,11 +527,10 @@ Stakeholders need to acknowledge that and mitigate the associated issues.
 
 ## The solution space in digital public services
 
-This section shows the elements that impacts on the
-solution space in digital public services, and which strategies can mitigate the risks associated with the different perspectives
-of  consumers' and IT architects' goals illustrated in [What
-does Domain mean for public
-services?](#what-does-domain-mean-for-public-services).
+This section shows the elements that affect the definition of the
+solution space in digital public services,
+and which strategies can mitigate the risks associated with the different perspectives
+of  consumers' and IT architects' goals illustrated in [What does Domain mean for public services?](#what-does-domain-mean-for-public-services).
 
 From the IT architect perspective, the problem space
 shifts from user expectations to the regulation.
@@ -597,35 +609,49 @@ class P0,Padder1,Padder2,Padder3,Padder4 subgraph_padding
 
 Service design needs to take into account:
 
-- functional requirements based on regulation and procedures that can constrain the Domain Model (e.g. suboptimal grouping of operations inherited from analogic procedures, convoluted data models based on paper forms, ...);
-- non-functional requirements like latency, durability, confidentiality, integrity and availability;
+- functional requirements based on regulation and procedures.
+  Thet can constrain the Domain Model
+  (e.g. suboptimal grouping of operations inherited from analogic procedures,
+  convoluted data models based on paper forms, ...);
+- non-functional requirements like latency, durability,
+  confidentiality, integrity and availability;
 - friction in addressing issues, regulation and procedures.
 
-When working inside a single domain, it is possible to mitigate some of these problems with [digital
-checks](https://joinup.ec.europa.eu/collection/better-legislation-smoother-implementation/news/digital-readiness-better-regulation-agenda)
+[digital checks]: https://joinup.ec.europa.eu/collection/better-legislation-smoother-implementation/news/digital-readiness-better-regulation-agenda
+[digital readiness assessment]: https://joinup.ec.europa.eu/collection/better-legislation-smoother-implementation/news/digital-readiness-better-regulation-agenda
+[regulatory sandboxes]: https://ec.europa.eu/info/business-economy-euro/better-regulation/regulatory-sandboxes_en
+[user-centric]: https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/solution/eif-toolbox/underlying-principle-6-user-centricity
+
+When working inside a single domain, it is possible to mitigate some of these problems with [digital checks] and [digital readiness assessment]
 at legal and organizational level
 (e.g. ensuring that regulation and procedures do not hinder the creation of digital services and avoid laws
-providing too much procedural or technical details that should instead be delegated to the implementation) or adopting a [user-centric
-approach](https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/solution/eif-toolbox/underlying-principle-6-user-centricity)
-when designing specific digital services.
+providing too much procedural or technical details that should instead be delegated to the implementation) or adopting a
+[user-centric] approach when designing specific digital services.
 When multiple domains (and regulations) are involved, this is more complex.
 
 Cross-domain interoperability is complicated by the fact that
 every institution (e.g. a ministry, a department, a country):
 
 1. has its own understanding of the interested domains;
-
 2. addresses different problems with different regulations and procedures;
+3. defines its services in terms of its own Model and [Bounded Context]s,
+   and has its internal [Ubiquitous Language] even when a common domain knowledge exists.
 
-3. defines its services in terms of its own Model and Bounded Contexts, and has its internal [Ubiquitous Language] even when a common domain knowledge exists.
+To avoid the significant work required to uniform procedures and regulations,
+Organizations tend to address cross-domain interoperability shifting problems
+away from their solution space (e.g. legal and organizational layers),
+down to the solution space of IT architects (the technical layer).
 
-Agencies tend to address cross-domain interoperability shifting problems
-away from the legal and organizational layers,
-down to the technical layer.
-Developing *ad hoc* connectors that are specific to each
-interaction is considered simpler than to uniform procedures and regulations,
-but this increases costs, complexity, and the attack
-surface of platforms, while reducing usability.
+This requires developing specific software components (*ad hoc* connectors)
+that support the conversion of information and procedures between different
+domains.
+This practice increases costs, complexity, and the attack surface of platforms, while reducing usability.
+
+The *connector* approach is similar to the [Anti-Corruption Layer] Pattern,
+with the difference that the [Anti-Corruption Layer] is usually a temporary
+solution that aims at isolating a legacy system from newer components.
+Instead, connectors are a permanent solution whose cost tend to increase in time.
+
 
 **Who**                       | **Problem Space**         |**Solution Space**
 ------------------------------| ------------------------- |-------------------------
@@ -634,12 +660,10 @@ Agencies                      | Regulatory framework      |Bureaucratic procedur
 Designer / Supplier           | Bureaucratic procedures   |Compliance
 
 
-Solutions involve working at all [EIF] interoperability layers:
-legal, organizational, semantic, and technical.
+Solutions involve working at all [EIF] interoperability layers, and:
 
-1. address the legal and organizational layer first. This is to
-   minimize the interoperability issues to be tackled at technical
-   level;
+1. address the legal and organizational layer first. This
+   minimizes the interoperability issues to be tackled at all the other layers;
 2. agree on a shared terminology (and ontologies) in order to have a
    common understanding of the problem space(s);
 3. avoid tightly coupling data models and operations with regulations;
@@ -651,20 +675,21 @@ legal, organizational, semantic, and technical.
 Domain terminology is key to the creation of interoperable services.
 Yet, there are differences between the public and the private sector.
 Since both kinds of organizations publish their common terminology using
-the Resource Description Framework (see [Ontologies model the problem
+[RDF] (see [Ontologies model the problem
 space](#ontologies-model-the-problem-space)), in this section we
-will rely on examples from different published vocabularies .
+will rely on examples from different published vocabularies.
 
 [Schema.org](https://schema.org/) is the result of joint efforts
 from web companies like Google and Facebook to provide a common
-terminology for the creation of commercial web services, and provide
+terminology for the creation of commercial web services,
+and increase
 both [semantic and syntactic interoperability](https://joinup.ec.europa.eu/collection/nifo-national-interoperability-framework-observatory/glossary/term/semantic-interoperability)
 for indexing web pages or identifying commercial events such as flights
 and concerts conveyed by messages on the Internet. As the domain grows,
 for example when mashing-up APIs from different fields in order to
 create an integrated service, identifying an Ubiquitous Language is more
 complex: this can be seen by the complexity of the
-[https://schema.org/Person](https://schema.org/Person) schema.
+https://schema.org/Person schema.
 
 Anyway, **in the private sector** the domain is driven by user
 expectations, and data management is based on user and provider consent.
@@ -680,46 +705,44 @@ Moreover they are impacted by unforeseeable changes in regulation (e.g.
 the concept of "Family" in the Taxation domain may change periodically
 according to the fiscal regulation).
 
-*Example: The Schema.org Vocabulary uses the URI
-[https://schema.org/givenName](https://schema.org/givenName) to
-reference the concept of given Name.*
+> Example: The Schema.org Vocabulary uses the URI
+https://schema.org/givenName to
+reference the concept of given Name.
 
-*Example: The Italian Core Person Vocabulary uses the URI
-[https://w3id.org/italia/onto/CPV/RegisteredFamily](https://w3id.org/italia/onto/CPV/RegisteredFamily)
+>Example: The Italian Core Person Vocabulary uses the URI
+ https://w3id.org/italia/onto/CPV/RegisteredFamily
 to reference the concept of "Registered Family" that is based on a
 specific regulation ([article 4 of Decreto del Presidente della
 Repubblica 30/05/1989, n.
-223](https://www.normattiva.it/eli/id/1989/06/08/089G0287/CONSOLIDATED)).*
+223](https://www.normattiva.it/eli/id/1989/06/08/089G0287/CONSOLIDATED)).
 
-*Example: The European Person Core Vocabulary includes concepts like the
+>Example: The European Person Core Vocabulary includes concepts like the
 patronymic name (Iceland does not have a concept of family name in the
-way that many other European countries do, see*
-*[https://www.w3.org/ns/person\#patronymicName](https://www.w3.org/ns/person#patronymicName))
-and the birth name (see*
-*[https://www.w3.org/ns/person\#birthName](https://www.w3.org/ns/person#birthName))
+way that many other European countries do, (see https://www.w3.org/ns/person#patronymicName)
+and the birth name (see https://www.w3.org/ns/person#birthName)
 which can be different from the concatenation of first and last name
 since these may change in time, as in the case of [Margaret Thatcher,
 neé
 Roberts](https://www.britannica.com/biography/Margaret-Thatcher).*
 
-Regulation changes can affect the institutional asset of a country or
-reshape administrative areas. These changes affect many domains, and may
-have unintended consequences that are usually addressed by subsequent,
-minor, organizational tweaks (similar to earthquake aftershocks). The
-changes required to adapt digital services to the new scenario are not
-driven by citizen needs that are explicit and specific to the domain.
+Regulation changes can affect the institutional asset of a country, or
+reshape administrative areas.
+These changes affect many domains, and may have unintended consequences
+that are usually addressed by subsequent, minor, organizational tweaks (similar to earthquake aftershocks).
+The changes required to adapt digital services to the new scenario are not
+driven by explicit, domain-specific, citizen needs.
 
-Example: In Italy, administrative units feature "provinces" and
+> Example: In Italy, administrative units feature "provinces" and
 "metropolitan cities", introduced in 2014. Some provinces were
 abolished in favor of metropolitan cities (e.g. the Metropolitan city of
 Rome), others include the area of various provinces (e.g.
 [Padova-Venezia-Treviso](https://it.wikipedia.org/wiki/PaTreVe))
-without replacing them. For statistical purposes, the concept of
-supra-municipal administrative unit was minted. Private services
-continue relying on the sole concept of province (e.g. for delivery
+without replacing them.
+For statistical purposes, the concept of supra-municipal administrative unit was minted.
+Private services continue relying on the sole concept of province (e.g. for delivery
 purposes), while public services need to distinguish between the
 different entities. For an example of "aftershocks", see
-[https://temi.camera.it/leg18/temi/tl18_province-1.html](https://temi.camera.it/leg18/temi/tl18_province-1.html)
+https://temi.camera.it/leg18/temi/tl18_province-1.html
 (in Italian and English).
 
 ## Ontologies and the solution space
@@ -727,15 +750,14 @@ different entities. For an example of "aftershocks", see
 expose their inner data models unnecessarily.
 
 Ontology design needs to balance compliance with the regulation and
-usefulness in describing the problem space from the citizens'
-perspective.
+usefulness in describing the problem space from the citizens' perspective.
 
 Ontologies describe the problem space and provide a basis for Ubiquitous
-Languages to be used in the various contexts. Terminology grows with the
-domain (e.g. as new subdomains are added), and to be effective for
-service designing, ontologies need to be developed in coordination with
-all stakeholders. This is the kind of work done on schema.org (e.g. see
-[github issues](https://github.com/schemaorg/schemaorg/issues?q=is%3Aissue+is%3Aopen+label%3A"schema.org+vocab")).
+Languages to be used in the various contexts.
+Terminology grows with the domain (e.g. as new subdomains are added),
+and to be effective for service design,
+ontologies need to be developed in coordination with all stakeholders.
+This is the kind of work done on schema.org (e.g. see [github issues](https://github.com/schemaorg/schemaorg/issues?q=is%3Aissue+is%3Aopen+label%3A"schema.org+vocab")).
 
 ```{mermaid}
 %% title: Communicating contexts
@@ -797,11 +819,12 @@ flowchart TB
 From a development perspective, public sector ontologies can be seen as
 software artifacts whose problem space is the regulation: this means
 that they are dynamic by design, and are supposed to evolve together
-with the business (the regulation). Ontologies tightly coupled with the
+with the business (the regulation).
+Ontologies tightly coupled with the
 regulation are ineffective to model the problem space from the
 citizen/user perspective, since not all regulatory changes are driven by
 citizens' expectations, even when they affect the providers' ability
-to erogate the service.
+to publish the service.
 
 ```{mermaid}
 %% title User Expectations
@@ -851,7 +874,7 @@ flowchart BT
 ```
 
 Instead of mutuating all concepts from specific regulations, ontology
-design should stay focused on the problem space as the user sees it. For
+design should focus on the problem space as the user sees it. For
 ontologies used in G2G interaction, this requires a cooperative work
 between legal and domain experts from different knowledge fields.
 
@@ -868,19 +891,20 @@ assessment on existing services.
 Designing for invariants is key, though it is not always feasible.
 
 Ontologies are used in specific domains as a base for describing data
-entries: this ensures that organization's data has a clear semantic. It
-is important to remark that it is not required to store data in RDF to
+entities: this ensures that organization's informatio has a clear semantic.
+It is important to remark that it is not required to store data in RDF to
 achieve this goal.
 
 Semantic consistency can be achieved simply by mapping a given datum to
 RDF: this can be done using different technologies and standards, as
 long as this process is automated.
 
-The diagram below shows how data stored according to a convenient
-physical model can be serialized in various formats without losing
-semantic information relying on mapping technologies like [the one
-described in the JSON-LD 1.1
-specifications](https://www.w3.org/TR/json-ld11/#interpreting-json-as-json-ld).
+The diagram below shows how,
+relying on mapping technologies like [the one described in the JSON-LD 1.1
+specifications](https://www.w3.org/TR/json-ld11/#interpreting-json-as-json-ld),
+data stored in a convenient physical model
+can be serialized in various formats without losing
+semantic information.
 Thanks to these mappings, information can be rendered as RDF; moreover,
 it can further be projected to lower-dimension data models using
 projection maps like JSON-LD framing.
@@ -935,27 +959,26 @@ System -->|produce| Data
 
 ```
 
-A drawback for processing data in RDF is the lack of support for syntax,
-and the computational efficiency of working with graphs instead of using
-simple trees. Inside a specific domain these issues are mitigated by the
-trust - that allows reducing validation checks - and by the lower data
-variance that reduces the number of ontologies involved.
+One disadvantage of RDF data processing is the absence of syntax support,
+as well as the computational burden of dealing with graphs rather than simple trees.
+Within a given domain, these difficulties are minimized by trust,
+which allows for fewer validation tests,
+and lower data variation, which minimizes the number of ontologies involved.
 
-When we need to model data to be used in cross-domain exchanges, it is
-better to avoid modeling using domain-specific ontologies and use
-mapping technologies instead. This allows services to be semantically
-consistent, reducing the need for changes that are not directly related
-to the business.
+When modeling data for cross-domain interactions,
+it is better to avoid mechanically using domain-specific ontologies,
+rdf:types and rdf:properties.
+Instead, it is advisable to use mapping technologies.
+This allows services to be semantically consistent,
+eliminating the requirement for non-business-related adjustments.
 
-*Example: a service provides location information like the following:*
+> Example: a service provides the following location information:
 
-```
+```yaml
 { city: Roma, province: RM }
 ```
 
-*where the province field is mapped to the URI
-http://places.example/province
-using a JSON-LD
+where the province field is mapped to the URI http://places.example/province using a JSON-LD @context.
 
 ```yaml
 "@context":
@@ -963,8 +986,8 @@ using a JSON-LD
     province: http://places.example/hasProvince
 ```
 
-It is possible to adapt the service to the new ontology changing the
-@context instead of the property name
+To adapt the service to a new ontology supporting the `hasProvinceOrMetropolitanCity`
+property, we can just change the @context instead of the property name
 
 ```yaml
 "@context":
@@ -972,35 +995,113 @@ It is possible to adapt the service to the new ontology changing the
     province: http://places.example/hasProvinceOrMetropolitanCity
 ```
 
+Using the `rdf:property` directly, the original entry would have been
+
+```yaml
+{ city: Roma, hasProvince: RM }
+```
+
+and since mapping `hasProvince` to `hasProvinceOrMetropolitanCity` using the @context
+would have been ambiguous, we would have had to change the property name.
+
+```yaml
+{ city: Roma, hasProvinceOrMetropolitanCity: RM }
+```
+
 The above example shows that modeling data on the basis of ontologies is
-not always a good choice. Data models are part of the Bounded contexts,
-together with the definition of procedures, inputs and outputs, and are
+not always a good choice.
+Data models are part of the Bounded contexts,
+together with the definition of [aggregates], procedures, inputs and outputs, and are
 affected by non-functional requirements such as latency, throughput,
 confidentiality and business continuity.
 
-When used for data modeling, RDF classes shift from the Domain
-description to the Bounded Contexts and should be designed and evolved
-without disrupting those contexts. In many cases this conflicts with the
+RDF classes are designed to describe the Domain:
+when we use them for data modeling, they shift
+to the Bounded Contexts and should be designed and evolved
+without disrupting those contexts.
+In many cases this conflicts with the
 expectations that organizations have on [ontologies], such as their
 immutability and their *a priori* definition with respect to digital
-services (see [Ontologies model the problem
-space](#ontologies-model-the-problem-space)).
+services (see [Ontologies model the problem space](#ontologies-model-the-problem-space)).
 
 ## Aligning the solution space between Users and Architects
 
-The solution space for architects is compliance, not user needs.
+As we said before, the solution space for digital public services' architects is regulatory compliance, not user needs.
+Similar considerations apply to API design.
 
-Similar considerations apply to API design: to align the solution space
-between users and architects, we need to apply user-centric design to
-public sector APIs. This requires challenging requirements coming from
-regulation to check whether they represent legal constraints or just
-habits from the bureaucratic world. Part of this work needs to be done
-when designing ontologies.
+To align the solution space between users and architects,
+we need to:
 
-In the latter case, it is possible to remove those constraints.
+1. apply user-centric design to public sector digital artifacts,
+   including APIs and Ontologies.
+   This requires challenging legal/organizational requirements:
+   do they represent effective legal obligations,
+   or just habits from the bureaucratic world?
+   It is clear that in the latter case, it is possible to remove those constraints.
 
-Another element is designing around data. While processes and data
-meaning change, public sector datasets are quite static.
+2. design APIs around data, and not around processes / bureaucratic procedures:
+   while processes and data meaning may change, public sector datasets are quite static.
+   And despite the fact that regulations are significantly different from one country to
+   another, the citizens' needs are very similar.
+   This is testified by the fact that there are plenty of global and interoperable
+   private sector services in various fields (e.g. banking, transport, etc.),
+   and that even in specific fields such as identity management,
+   the same products can be used in different countries.
+
+3. ensure data models are linkable to ontologies
+   but preserve a certain degree of flexibility in order
+   to accommodate ontology evolution and non-functional requirements.
+
+[REST API Linked Data Keywords]: https://datatracker.ietf.org/doc/draft-polli-restapi-ld-keywords/
+
+### Aligning the solution space in schema design
+
+The [REST API Linked Data Keywords] specifications provide a simple
+but effective way to ensure that data models are linkable to ontologies
+without being constrained by them.
+
+These specifications allows to attach to an [JSON Schema] data model
+all the semantic information required to identify the meaning of the associates
+instance.
+This is done specifying the [JSON-LD] `@context` and `@type` information,
+and can even be used to transform a JSON Schema instance to an RDF graph.
+
+Example: annotating a JSON Schema with Linked Data keywords
+
+```yaml
+Person:
+  "x-jsonld-type": "https://schema.org/Person"
+  "x-jsonld-context":
+     "@vocab": "https://schema.org/"
+     email: "@id"
+     custom_id: null  # detach this property from the @vocab
+     country:
+       "@id": addressCountry
+       "@type": "@id"
+       "@context":
+          "@base": "http://publications.europa.eu/resource/authority/country/"
+
+  type: object
+  required:
+  - email
+  - given_name
+  - family_name
+  properties:
+    email: { type: string, maxLength: 255  }
+    familyName: { type: string, maxLength: 255  }
+    givenName:  { type: string, maxLength: 255  }
+    country:    { type: string, maxLength: 3, minLength: 3 }
+    custom_id:  { type: string, maxLength: 255  }
+  example:
+    familyName: "Doe"
+    givenName: "John"
+    email: "jon@doe.example"
+    country: "FRA"
+    custom_id: "12345"
+```
+
+
+
 
 ---
 

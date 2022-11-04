@@ -1,3 +1,74 @@
+### Connectors approach
+
+```mermaid
+flowchart
+    classDef default stroke:white,color:#fff,clusterBkg:none,fill:#3344d0
+    classDef cluster font-weight: bold,fill:none,color:darkgray,stroke:#3344d0,stroke-width:2px
+    classDef subgraph_padding fill:none, stroke:none, opacity:0
+    classDef bounded_context stroke-dasharray:5 5
+
+subgraph pad1
+S1
+S2
+S3
+S4
+end
+
+
+subgraph pad2
+c11((c11))
+c12((c12))
+c13((c13))
+c14((c14))
+end
+
+S1 --- c11
+S2 --- c12
+S3 --- c13
+S4 --- c14
+
+c11 --- c12 & c13 & c14
+c12 --- c13 & c14
+c13 --- c14
+
+```
+
+### Domain Drive Design Map
+
+```mermaid
+flowchart BT
+    classDef default stroke:white,color:#fff,clusterBkg:none,fill:#3344d0
+    classDef cluster font-weight: bold,fill:none,color:darkgray,stroke:#3344d0,stroke-width:2px
+    classDef subgraph_padding fill:none, stroke:none, opacity:0
+    classDef bounded_context stroke-dasharray:5 5
+
+subgraph BC [Bounded Context]
+    Aggregates ---
+    Entities ---
+    VO((Value Objects))
+    Factories
+    Repositories
+    Services
+end
+
+subgraph CMP [Context Map Patterns]
+    %% Upstream
+    OHS((Open Host Service))
+
+    %% In-Between
+    SK((Shared Kernel))
+    SW((Separate Ways))
+    PL((Published Language))
+
+    %% Downstream
+    CS((Customer Supplier))
+    Conformist((Conformist))
+    AL((Anticorruption Layer))
+end
+
+BC --- CMP
+```
+
 ### Domain vs regulation
 
 
